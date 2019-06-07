@@ -46,6 +46,6 @@ class CooksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def cook_params
-      params.require(:cook).permit(:name)
+      params.require(:cook).permit(:name, :user_id)
     end
 end
