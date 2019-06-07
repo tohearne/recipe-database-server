@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :favorites, except: %i[new edit]
+  resources :steps, except: %i[new edit]
+  resources :ingredients, except: %i[new edit]
+  resources :recipes, except: %i[new edit]
   # RESTful routes
   resources :examples, except: %i[new edit]
 
