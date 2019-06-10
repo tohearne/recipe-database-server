@@ -2,7 +2,11 @@
 
 class UsersController < ProtectedController
   skip_before_action :authenticate, only: %i[signup signin]
+  before_action :set_user, only: %i[show destroy]
 
+  def show
+    render json: @user
+  end
   # POST '/sign-up'
   def signup
     user = User.create(user_creds)
@@ -46,7 +50,15 @@ class UsersController < ProtectedController
     end
   end
 
+  def destroy
+    @user.destroy
+  end
+
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_creds
     params.require(:credentials)
