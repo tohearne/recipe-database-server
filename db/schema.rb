@@ -17,8 +17,10 @@ ActiveRecord::Schema.define(version: 2019_06_07_174439) do
 
   create_table "cooks", force: :cascade do |t|
     t.string "name"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cooks_on_user_id"
   end
 
   create_table "examples", force: :cascade do |t|
@@ -68,6 +70,7 @@ ActiveRecord::Schema.define(version: 2019_06_07_174439) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "cooks", "users"
   add_foreign_key "examples", "users"
   add_foreign_key "favorites", "recipes"
   add_foreign_key "favorites", "users"
