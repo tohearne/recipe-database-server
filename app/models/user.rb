@@ -3,6 +3,6 @@
 class User < ApplicationRecord
   include Authentication
   has_many :favorites, dependent: :destroy
-  has_many :recipes, through: :favorites
   has_one :cook
+  has_many :recipes, through: :cook
 end
