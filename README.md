@@ -1,13 +1,9 @@
 # Recipe Database Server
 This is the backend for my recipe database, a web app that lets users browse and favorite recipes on the site, as well as share their own recipes for others to see and favorite
 
+#### Frontend: https://github.com/tohearne/recipe-database-client
+
 ## List technologies used
--   html
--   css/scss
--   javascript
--   ajax
--   jquery
--   handlebars
 -   json
 -   ruby
 -   rails
