@@ -1,4 +1,5 @@
-class CooksController < ApplicationController
+class CooksController < ProtectedController
+  skip_before_action :authenticate, only: [:create]
   before_action :set_cook, only: [:show, :update, :destroy]
 
   # GET /cooks
@@ -18,7 +19,7 @@ class CooksController < ApplicationController
     @cook = Cook.new(cook_params)
 
     if @cook.save
-      render json: @cook, status: :created, location: @cook
+      render json: @cook, status: :created
     else
       render json: @cook.errors, status: :unprocessable_entity
     end
@@ -41,7 +42,7 @@ class CooksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cook
-      @cook = Cook.find(params[:id])
+      @cook = current_user.cook.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

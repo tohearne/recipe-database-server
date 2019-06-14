@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :cooks, except: %i[new edit]
-  resources :favorites, except: %i[new edit]
-  resources :steps, except: %i[new edit]
-  resources :ingredients, except: %i[new edit]
-  resources :recipes, except: %i[new edit]
   # RESTful routes
-  resources :examples, except: %i[new edit]
+  resources :cooks, only: %i[create]
+  resources :favorites, only: %i[create destroy]
+  resources :steps, only: %i[create update]
+  resources :ingredients, only: %i[create update]
+  resources :recipes, except: %i[new edit]
   resources :users, only: %i[show]
 
   # Custom routes

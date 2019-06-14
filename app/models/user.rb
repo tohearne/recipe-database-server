@@ -5,4 +5,6 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_one :cook
   has_many :recipes, through: :cook
+  has_many :ingredients, through: :cook
+  has_many :steps, through: :cook
 end

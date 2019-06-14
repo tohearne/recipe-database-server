@@ -1,4 +1,4 @@
-class StepsController < OpenReadController
+class StepsController < ProtectedController
   before_action :set_step, only: %i[show update destroy]
 
   # GET /steps
@@ -15,7 +15,7 @@ class StepsController < OpenReadController
 
   # POST /steps
   def create
-    @step = Step.new(step_params)
+    @step = current_user.steps.build(step_params)
 
     if @step.save
       render json: @step, status: :created, location: @step
@@ -41,11 +41,11 @@ class StepsController < OpenReadController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_step
-    @step = Step.find(params[:id])
+    @step = current_user.steps.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def step_params
-    params.require(:step).permit(:title, :instructions, :recipe_id)
+    params.require(:step).permit(:title, :instructions, :recipe_id, :cook_id)
   end
 end

@@ -1,5 +1,6 @@
 class RecipesController < OpenReadController
-  before_action :set_recipe, only: [:show, :update, :destroy]
+  before_action :set_recipe, only: [:show]
+  before_action :set_recipe_auth, only: [:update, :destroy]
 
   # GET /recipes
   def index
@@ -15,7 +16,7 @@ class RecipesController < OpenReadController
 
   # POST /recipes
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = current_user.recipes.build(recipe_params)
 
     if @recipe.save
       render json: @recipe, status: :created, location: @recipe
@@ -42,6 +43,10 @@ class RecipesController < OpenReadController
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.find(params[:id])
+    end
+
+    def set_recipe_auth
+      @recipe = current_user.recipes.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
